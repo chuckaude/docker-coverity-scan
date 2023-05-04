@@ -1,16 +1,15 @@
-FROM maven:3-openjdk-17
-ARG VERSION=2022.9.2
+FROM maven:latest
+ARG VERSION=2023.3.0
 COPY cov-analysis-linux64-$VERSION.sh /tmp
 COPY license.dat /tmp
 RUN sh /tmp/cov-analysis-linux64-$VERSION.sh -q \
 	--installation.dir=/opt/coverity/analysis/$VERSION \
 	--license.cov.path=/tmp/license.dat \
 	--license.agreement=agree --license.region=0 --license.type.choice=0 \
-	--component.cov_pns=false --component.sdk=false --component.skip.documentation=true && \
-	rm /tmp/cov-analysis-linux64-$VERSION.sh /tmp/license.dat
+	--component.cov_pns=false --component.sdk=false --component.skip.documentation=true
 
-FROM maven:3-openjdk-17
-ARG VERSION=2022.9.2
+FROM maven:latest
+ARG VERSION=2023.3.0
 ENV PATH="/opt/coverity/analysis/$VERSION/bin:${PATH}"
 COPY --from=0 /opt/coverity /opt/coverity
 COPY entrypoint.sh /tmp

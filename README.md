@@ -8,7 +8,7 @@ Examples for bundling the Coverity analysis toolkit into a base image and using 
 3. Copy your Coverity license and analysis installer
 4. Build the image via
 ```
-docker build --build-arg VERSION=2022.9.2 -t coverity-scan .
+docker build --build-arg VERSION=2023.3.0 -t coverity-scan .
 ```
 5. Scan a repo via
 ```

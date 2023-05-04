@@ -1,5 +1,5 @@
 TAG = coverity-scan
-VERSION = 2022.9.2
+VERSION = 2023.3.0
 
 maven: clean copy-maven build test-maven
 net6: clean copy-net6 build test-net6
@@ -7,7 +7,7 @@ net6: clean copy-net6 build test-net6
 clean:
 	docker rmi -f ${TAG}
 	docker system prune -f
-	rm -f cov-analysis-linux64-${VERSION}.sh license.dat
+	rm -f cov-analysis-linux64-${VERSION}.sh license.dat Dockerfile
 
 copy-maven:
 	cp -fp Dockerfile.maven Dockerfile
@@ -24,7 +24,7 @@ build:
 
 test-maven:
 	docker run --rm -e COV_URL=${COV_URL} -e COV_USER=${COV_USER} -e COVERITY_PASSPHRASE=${COVERITY_PASSPHRASE} \
-		${TAG} https://github.com/WebGoat/WebGoat.git develop
+		${TAG} https://github.com/WebGoat/WebGoat.git main
 
 test-net6:
 	docker run --rm -e COV_URL=${COV_URL} -e COV_USER=${COV_USER} -e COVERITY_PASSPHRASE=${COVERITY_PASSPHRASE} \
